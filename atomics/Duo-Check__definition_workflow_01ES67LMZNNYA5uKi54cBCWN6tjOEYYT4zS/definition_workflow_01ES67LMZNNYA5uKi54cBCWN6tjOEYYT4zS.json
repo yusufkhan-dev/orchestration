@@ -7,6 +7,30 @@
     "base_type": "workflow",
     "variables": [
       {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "/auth/v2/check",
+          "scope": "local",
+          "name": "path",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01ES6O1XUR11R14F2FCLj0xyhKyiDo7xLku",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "GET",
+          "scope": "local",
+          "name": "method",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01ES6OHHNR0J56ymkQu6lpC4U1wOP3katOf",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.integer",
         "properties": {
           "value": 0,
@@ -68,35 +92,11 @@
         },
         "unique_name": "variable_workflow_01ES6N3LYADBT0Y55UNmAx1ZXCsQSdqbaaM",
         "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "/auth/v2/check",
-          "scope": "local",
-          "name": "path",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01ES6O1XUR11R14F2FCLj0xyhKyiDo7xLku",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "GET",
-          "scope": "local",
-          "name": "method",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01ES6OHHNR0J56ymkQu6lpC4U1wOP3katOf",
-        "object_type": "variable_workflow"
       }
     ],
     "properties": {
       "atomic": {
-        "atomic_group": "Duo",
+        "atomic_group": "Cisco Duo Security",
         "is_atomic": true
       },
       "delete_workflow_instance": true,
