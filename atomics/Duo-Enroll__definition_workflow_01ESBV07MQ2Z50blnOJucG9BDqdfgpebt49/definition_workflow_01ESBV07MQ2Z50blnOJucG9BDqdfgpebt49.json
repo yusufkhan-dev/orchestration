@@ -7,68 +7,6 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 0,
-          "scope": "output",
-          "name": "Response Code",
-          "type": "datatype.integer",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01ESBV076ND3J2jHv9mPY7PTvvhGmdMa0sa",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "Hostname",
-          "type": "datatype.string",
-          "description": "Your Duo API hostname. This is obtained from your application information within the Duo admin interface",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01ESBV076NKLV4sF6c5z4jr5mpyCVp335iN",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "Duo Username",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FMXP87QZ6Y91Rdfx5S0wWaKSnuY5BC8Ok",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.integer",
-        "properties": {
-          "value": 86400,
-          "scope": "input",
-          "name": "Valid Seconds",
-          "type": "datatype.integer",
-          "description": "Seconds for which the activation code will remain valid. Default: 86400 (one day)",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01ESBX2SGZ4Y10BDjiwBsxjlLGUg4dtYTmX",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "Activation Barcode",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01FMXOIC0DM1Q6IcYgTxCTVkszR4toLZCek",
-        "object_type": "variable_workflow"
-      },
-      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "/auth/v2/enroll",
@@ -83,51 +21,13 @@
       {
         "schema_id": "datatype.string",
         "properties": {
-          "value": "POST",
-          "scope": "local",
-          "name": "method",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01ESBV076NI5O0peeyDqpEa0cRvt6tMBC9z",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.secure_string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "Secret Key",
-          "type": "datatype.secure_string",
-          "description": "Your Duo API secret key. This is obtained from your application information within the Duo admin interface",
-          "is_required": true
-        },
-        "unique_name": "variable_workflow_01ESBV076N15T2KgGTSxKy3ggG3Fo6PIZ58",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "Username",
-          "type": "datatype.string",
-          "description": "Username for the created user. If not given, a random username will be assigned and returned",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01ESBV076MV952J8nTGWaR4UT9zcR6ro5ip",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
           "value": "",
           "scope": "output",
-          "name": "Activation Code",
+          "name": "Response Body",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01FMXOOBWOF3L4v7GC1hOage0uOnurtoWPb",
+        "unique_name": "variable_workflow_01ESBV076NGX15MZ6ZFNNOD4X35NkWqyj51",
         "object_type": "variable_workflow"
       },
       {
@@ -148,11 +48,111 @@
         "properties": {
           "value": "",
           "scope": "output",
+          "name": "Activation Code",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FMXOOBWOF3L4v7GC1hOage0uOnurtoWPb",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Hostname",
+          "type": "datatype.string",
+          "description": "Your Duo API hostname. This is obtained from your application information within the Duo admin interface",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01ESBV076NKLV4sF6c5z4jr5mpyCVp335iN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
           "name": "Expiration",
           "type": "datatype.string",
           "is_required": false
         },
         "unique_name": "variable_workflow_01FMXOTFXGBVB3Wep2f1SxYCktwldrZyv3X",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Secret Key",
+          "type": "datatype.secure_string",
+          "description": "Your Duo API secret key. This is obtained from your application information within the Duo admin interface",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01ESBV076N15T2KgGTSxKy3ggG3Fo6PIZ58",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Activation Barcode",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FMXOIC0DM1Q6IcYgTxCTVkszR4toLZCek",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "Response Code",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01ESBV076ND3J2jHv9mPY7PTvvhGmdMa0sa",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "POST",
+          "scope": "local",
+          "name": "method",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01ESBV076NI5O0peeyDqpEa0cRvt6tMBC9z",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Username",
+          "type": "datatype.string",
+          "description": "Username for the created user. If not given, a random username will be assigned and returned",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01ESBV076MV952J8nTGWaR4UT9zcR6ro5ip",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 86400,
+          "scope": "input",
+          "name": "Valid Seconds",
+          "type": "datatype.integer",
+          "description": "Seconds for which the activation code will remain valid. Default: 86400 (one day)",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01ESBX2SGZ4Y10BDjiwBsxjlLGUg4dtYTmX",
         "object_type": "variable_workflow"
       },
       {
@@ -172,17 +172,17 @@
         "properties": {
           "value": "",
           "scope": "output",
-          "name": "Response Body",
+          "name": "Duo Username",
           "type": "datatype.string",
           "is_required": false
         },
-        "unique_name": "variable_workflow_01ESBV076NGX15MZ6ZFNNOD4X35NkWqyj51",
+        "unique_name": "variable_workflow_01FMXP87QZ6Y91Rdfx5S0wWaKSnuY5BC8Ok",
         "object_type": "variable_workflow"
       }
     ],
     "properties": {
       "atomic": {
-        "atomic_group": "Duo",
+        "atomic_group": "Cisco Duo Security",
         "is_atomic": true
       },
       "delete_workflow_instance": true,
