@@ -1,0 +1,243 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01G8V79ZUQBUK5HjgyvwYdNZVkqdiHDfZGB",
+    "name": "Umbrella - Get Security Activity Report",
+    "title": "Umbrella - Get Security Activity Report",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Stop Time",
+          "type": "datatype.string",
+          "description": "Date/time of when to stop getting records. Sample value: 2020-06-01T10:00:00-0700",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01G8WMZFDTLIH2gcumWtflo7NhLq5hwAOSD",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Organization ID",
+          "type": "datatype.string",
+          "description": "Your Umbrella organization ID",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01G8VQUSS7DK15wrxFTF4L8A1aYYficUck7",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Response Body",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01G8WB2GFWGFM5HU3ajU4KuOCqiawSKNG7M",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "Result Count",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01G8WBDAQFZCM7TeNi1N8i95sZQMyTakogP",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Start Time",
+          "type": "datatype.string",
+          "description": "Date/time of when to start getting records from. Sample value: 2020-06-01T10:00:00-0700",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01G8WMSF48NS65yUcV0sFdFQSLjXkQDkpEo",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "Cisco Umbrella",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": true,
+      "description": "Gets security activity report events from Umbrella\n\n[] Convert the input times into Epochs\n[] Execute the API request to get report data\n[] Extract the results of the request\n[] Check if there were any results and set the output variables\n\nNote: A maximum of 500 records will be returned",
+      "display_name": "Umbrella - Get Security Activity Report",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01G8VITA64SKR2PmSQt3halhkYetjgIvo8X",
+        "name": "Execute Python Script",
+        "title": "Convert timestamps to epochs",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Convert timestamps to epochs",
+          "script": "import sys,time, os\n\n# Input format: 0001-01-01T00:00:00+00:00\nstampFormat = '%Y-%m-%dT%H:%M:%S%z'\n\nstartTime = sys.argv[1]\nstopTime = sys.argv[2]\n\nstartEpoch = int(time.mktime(time.strptime(startTime, stampFormat)))\nstopEpoch = int(time.mktime(time.strptime(stopTime, stampFormat)))",
+          "script_arguments": [
+            "$workflow.definition_workflow_01G8V79ZUQBUK5HjgyvwYdNZVkqdiHDfZGB.input.variable_workflow_01G8WMSF48NS65yUcV0sFdFQSLjXkQDkpEo$",
+            "$workflow.definition_workflow_01G8V79ZUQBUK5HjgyvwYdNZVkqdiHDfZGB.input.variable_workflow_01G8WMZFDTLIH2gcumWtflo7NhLq5hwAOSD$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "startEpoch",
+              "script_query_name": "startEpoch",
+              "script_query_type": "string"
+            },
+            {
+              "script_query": "stopEpoch",
+              "script_query_name": "stopEpoch",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01G8VQ54WFGTF6SXhq5BjkfOpvF6gM7DFdx",
+        "name": "HTTP Request",
+        "title": "Get report data",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "Get report data",
+          "method": "GET",
+          "relative_url": "/organizations/$workflow.definition_workflow_01G8V79ZUQBUK5HjgyvwYdNZVkqdiHDfZGB.input.variable_workflow_01G8VQUSS7DK15wrxFTF4L8A1aYYficUck7$/security-activity?limit=500\u0026start=$activity.definition_activity_01G8VITA64SKR2PmSQt3halhkYetjgIvo8X.output.script_queries.startEpoch$\u0026stop=$activity.definition_activity_01G8VITA64SKR2PmSQt3halhkYetjgIvo8X.output.script_queries.stopEpoch$",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01G8W7ED2SC8Q3DKexk2wUmrFiKcXW7Onbl",
+        "name": "JSONPath Query",
+        "title": "Extract results",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Extract results",
+          "input_json": "$activity.definition_activity_01G8VQ54WFGTF6SXhq5BjkfOpvF6gM7DFdx.output.response_body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$.requests",
+              "jsonpath_query_name": "requests",
+              "jsonpath_query_type": "string"
+            },
+            {
+              "jsonpath_query": "$.requests.length()",
+              "jsonpath_query_name": "recordCount",
+              "jsonpath_query_type": "integer"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01G8WAIKYMOIT343l5BBJyqPZm7dF8FBTNg",
+        "name": "Condition Block",
+        "title": "Were there results?",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Were there results?",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01G8WAIP3DNAB1GU8dLXkfQ5KhS4l85Xoma",
+            "name": "Condition Branch",
+            "title": "Yes",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01G8W7ED2SC8Q3DKexk2wUmrFiKcXW7Onbl.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Yes",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01G8WBPERN2HU6woLHny7qixfk9fplB2VBb",
+                "name": "Set Variables",
+                "title": "Set output variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set output variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01G8V79ZUQBUK5HjgyvwYdNZVkqdiHDfZGB.output.variable_workflow_01G8WB2GFWGFM5HU3ajU4KuOCqiawSKNG7M$",
+                      "variable_value_new": "$activity.definition_activity_01G8W7ED2SC8Q3DKexk2wUmrFiKcXW7Onbl.output.jsonpath_queries.requests$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01G8V79ZUQBUK5HjgyvwYdNZVkqdiHDfZGB.output.variable_workflow_01G8WBDAQFZCM7TeNi1N8i95sZQMyTakogP$",
+                      "variable_value_new": "$activity.definition_activity_01G8W7ED2SC8Q3DKexk2wUmrFiKcXW7Onbl.output.jsonpath_queries.recordCount$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
