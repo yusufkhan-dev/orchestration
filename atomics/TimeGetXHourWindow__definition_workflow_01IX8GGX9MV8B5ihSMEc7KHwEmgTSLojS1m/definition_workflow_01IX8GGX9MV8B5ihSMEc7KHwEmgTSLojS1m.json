@@ -10,6 +10,19 @@
         "schema_id": "datatype.date",
         "properties": {
           "value": "0001-01-01T00:00:00+00:00",
+          "scope": "input",
+          "name": "Window End",
+          "type": "datatype.date",
+          "description": "When the window should end. If a Window Start is provided, this input is ignored",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01J33P7EL7N9Z2D3fmNjs46CQD8rJi6rMgC",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.date",
+        "properties": {
+          "value": "0001-01-01T00:00:00+00:00",
           "scope": "output",
           "name": "Window End Time",
           "type": "datatype.date",
@@ -55,19 +68,6 @@
         },
         "unique_name": "variable_workflow_01J33P2M1J0SE7OlAW5e3kyi3cqIhBI7vkn",
         "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.date",
-        "properties": {
-          "value": "0001-01-01T00:00:00+00:00",
-          "scope": "input",
-          "name": "Window End",
-          "type": "datatype.date",
-          "description": "When the window should end. If a Window Start is provided, this input is ignored",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01J33P7EL7N9Z2D3fmNjs46CQD8rJi6rMgC",
-        "object_type": "variable_workflow"
       }
     ],
     "properties": {
@@ -76,7 +76,7 @@
         "is_atomic": true
       },
       "delete_workflow_instance": false,
-      "description": "Calculates a window of X hours starting from \"Window Start\" or ending at \"Window End.\" If neither of these inputs are provided, the window will start X hours ago and end at the atomic's start time. If both of these inputs are provided, the start time is used and the end time is ignored.",
+      "description": "Calculates a window of X hours starting from \"Window Start\" or ending at \"Window End.\" If neither of these inputs are provided, the window will start X hours ago and end at the atomic's start time. If both of these inputs are provided, the start time is used and the end time is ignored.\n\nLicense: https://developer.cisco.com/site/license/cisco-sample-code-license/",
       "display_name": "Time - Get X Hour Window",
       "runtime_user": {
         "override_target_runtime_user": false,
